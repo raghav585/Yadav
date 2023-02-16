@@ -127,7 +127,8 @@ async def account_login(bot: Client, m: Message):
         for i in range(arg, len(links)):
             
             url = links[i][1]
-            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
+            name2 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
+            name1 = name2[:150]
             
             if raw_text2 =="144":
 
