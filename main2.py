@@ -99,7 +99,7 @@ async def restart_handler(_, m):
 @bot.on_message(filters.command(["txt"]) & (filters.chat(sudo_groups)))
 async def account_login(bot: Client, m: Message):
 
-    editable = await m.reply_text(" **Hello DeAr,** I am Text Downloader Bot.\nI can download videos from text file one by one.\n\n**Developer:** HeArt🖤 \n**Language:**🔥Python\n\nNow Send Your **TXT File**\n")
+    editable = await m.reply_text(" **Hello DeAr,** I am Text Downloader Bot.\nI can download videos from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow Send Your **TXT File:-**\n")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -137,7 +137,7 @@ async def account_login(bot: Client, m: Message):
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
 
-    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/d9e24878bd4aba05049a1.jpg```\n\nor Send **no**")
+    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/1c2a10e73e22774c5ce0e.jpg```\n\nor Send **no**")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
 
@@ -352,17 +352,17 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
 
             try:
-                Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-**\n`{url}`\n\n**With ❤️ From Admins**"
+                Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-**\n`{url}`\n\n"
                 prog = await m.reply_text(Show)
-                cc = f'{str(count).zfill(3)}.  {name1} {res}.mkv\n\n**Batch:** {raw_text0}\n\n**Downloaded By:** Respected Admins❤️'
-                cc1 = f'{str(count).zfill(3)}. {name1} {res}.pdf\n\n**Batch:** {raw_text0}\n\n**Downloaded By:**Respected Admins❤️'
+                cc = f'{str(count).zfill(3)}.  {name1} {res}.mkv\n\n**Batch:-** {raw_text0}\n\n'
+                cc1 = f'{str(count).zfill(3)}. {name1} {res}.pdf\n\n**Batch:-** {raw_text0}\n\n'
 #                 if cmd == "pdf" or "drive" in url:
 #                     try:
 #                         ka=await helper.download(url,name)
 #                         await prog.delete (True)
 #                         time.sleep(1)
 #                         # await helper.send_doc(bot,m,cc,ka,cc1,prog,count,name)
-#                         reply = await m.reply_text(f"Uploading - `{name}`\n\n**With ❤️ From Admins.**")
+#                         reply = await m.reply_text(f"Uploading - `{name}`\n")
 #                         time.sleep(1)
 #                         start_time = time.time()
 #                         await m.reply_document(ka,caption=cc1)
@@ -380,10 +380,10 @@ async def account_login(bot: Client, m: Message):
                         ka = await helper.aio(url, name)
                         await prog.delete(True)
                         time.sleep(1)
-                        reply = await m.reply_text(f"Uploading - ```{name}```\n\n**With ❤️ From Admins.**")
+                        reply = await m.reply_text(f"Uploading - ```{name}```\n")
                         time.sleep(1)
                         start_time = time.time()
-                        await m.reply_document(ka, caption=f'{str(count).zfill(3)}. {name1} {res}.pdf\n\n**Batch:** {raw_text0}\n\n**Downloaded By:**Respected Admins❤️')
+                        await m.reply_document(ka, caption=f'{str(count).zfill(3)}. {name1} {res}.pdf\n\n**Batch:-** {raw_text0}\n')
                         count += 1
                         # time.sleep(1)
                         await reply.delete(True)
@@ -402,7 +402,7 @@ async def account_login(bot: Client, m: Message):
                     time.sleep(1)
 
             except Exception as e:
-                await m.reply_text(f"**downloading failed **\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n**With ❤️ From Admins**")
+                await m.reply_text(f"**downloading failed **\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n")
                 continue
 
     except Exception as e:
@@ -412,7 +412,7 @@ async def account_login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["top"]) & (filters.chat(sudo_groups)))
 async def account_login(bot: Client, m: Message):
-    editable = await m.reply_text(f"**Hello DeAr,** I am **TopRankers Downloader Bot.**\nI can download videos from text file one by one.\n\n**Developer:** HeArt🖤 \n**Language:**🔥Python\n\nNow Send Your **TXT File.**")
+    editable = await m.reply_text(f"**Hello DeAr,** I am **TopRankers Downloader Bot.**\nI can download videos from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram \n\nNow Send Your **TXT File:-**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -448,7 +448,7 @@ async def account_login(bot: Client, m: Message):
     input5: Message = await bot.listen(editable.chat.id)
     raw_text5 = input5.text
 
-    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/d9e24878bd4aba05049a1.jpg```\n\nor Send **no**")
+    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/1c2a10e73e22774c5ce0e.jpg```\n\nor Send **no**")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
 
@@ -500,7 +500,7 @@ async def account_login(bot: Client, m: Message):
             name = f'{str(count).zfill(3)}) {name1}'
             Show = f"**Downloading:-**\n\n**Name :-** `{name}`\n\n**Url :-** `{url}`\n\n**rout** :- `{rout}`"
             prog = await m.reply_text(Show)
-            cc = f'{str(count).zfill(3)}.  {name1} {res}.mp4\n\n**Batch:** {raw_text0}\n\n**Downloaded By: Respected Admins❤️**'
+            cc = f'{str(count).zfill(3)}.  {name1} {res}.mp4\n\n**Batch:-** {raw_text0}\n\n'
 
             cmd = f'yt-dlp -o "{name}.mp4" --cookies {cook} "{url}"'
             try:
@@ -510,7 +510,7 @@ async def account_login(bot: Client, m: Message):
                 subprocess.run(
                     f'ffmpeg -i "{filename}" -ss 00:01:00 -vframes 1 "{filename}.jpg"', shell=True)
                 await prog.delete(True)
-                reply = await m.reply_text(f"Uploading - ```{name}```\n\n**With ❤️ From Admins**")
+                reply = await m.reply_text(f"Uploading - ```{name}```\n")
                 try:
                     if thumb == "no":
                         thumbnail = f"{filename}.jpg"
@@ -541,7 +541,7 @@ async def account_login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["adda_pdf"]))
 async def adda_pdf(bot: Client, m: Message):
-    editable = await m.reply_text(f"**Hi im Pdf Adda pdf dl**\n\n**Developer:** HeArt🖤 \n**Language:**🔥Python\n\nNow send your file to download **ADDA PDFs**\n")
+    editable = await m.reply_text(f"**Hi im Pdf Adda pdf dl**\n\n**Developer : Smile Bhai**\n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow send your file to download **ADDA PDFs**\n")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -606,7 +606,7 @@ async def adda_pdf(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["jw"]) & (filters.chat(sudo_groups)))
 async def account_login(bot: Client, m: Message):
-    editable = await m.reply_text("**Hellow deAr,**\n\n**Developer:** HeArt🖤 \n**Language:**🔥Python\n\n**Send txt file:-**")
+    editable = await m.reply_text("**Hellow deAr,**\n\n**Developer: Smile Bhai**\n**Language:**🔥Python\n\n**Send txt file:-**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -644,7 +644,7 @@ async def account_login(bot: Client, m: Message):
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
 
-    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/d9e24878bd4aba05049a1.jpg```\n\nor Send **no**")
+    editable4 = await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/1c2a10e73e22774c5ce0e.jpg```\n\nor Send **no**")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
 
