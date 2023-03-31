@@ -838,7 +838,7 @@ async def vision_pdf(bot: Client, m: Message):
             time.sleep(3)
     except Exception as e:
         await m.reply_text(e)
-        await m.reply_text("Done.")
+    await m.reply_text("Done.")
 
 
 
