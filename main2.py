@@ -78,7 +78,7 @@ bot = Client(
 @bot.on_message(filters.command(["start"]) & (filters.chat(sudo_groups)))
 async def account_login(bot: Client, m: Message):
 
-    editable = await m.reply_text("**Hellow deAr,** i am here for multipurpose & in **under construction.**\n\n**Developer:** HeArtðŸ–¤ \n**Language:**ðŸ”¥Python\n\n**All running commands are:-**\n\n/txt\n/adda_pdf\n/jw\n/heArt\n/top\n/cw\n/pw\n\n**BOT IS IN  UNDERCONSTRUCTION.**\n")
+    editable = await m.reply_text("**Hellow deAr,** i am here for multipurpose & in **under construction.**\n\n**Developer:** Smile Bhai \n**Language:** Python\n\n**All running commands are:-**\n\n/txt\n/adda_pdf\n/jw\n/heArt\n/top\n/cw\n/pw\n\n**BOT IS IN  UNDERCONSTRUCTION.**\n")
 
 
 @bot.on_message(filters.command(["cancel"]) & (filters.chat(sudo_groups)))
@@ -86,20 +86,20 @@ async def cancel(_, m):
     editable = await m.reply_text("Canceling All process Plz wait")
     global cancel
     cancel = True
-    await editable.edit("cancledðŸ˜¡")
+    await editable.edit("cancled😡", True)
     return
 
 
 @bot.on_message(filters.command("restart") & (filters.chat(sudo_groups)))
 async def restart_handler(_, m):
-    await m.reply_text("Restarted!ðŸ™„", True)
+    await m.reply_text("Restarted!🙄", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 @bot.on_message(filters.command(["txt"]) & (filters.chat(sudo_groups)))
 async def account_login(bot: Client, m: Message):
 
-    editable = await m.reply_text(" **Hello DeAr,** I am Text Downloader Bot.\nI can download videos from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** ðŸ”¥Pyrogram\n\nNow Send Your **TXT File:-**\n")
+    editable = await m.reply_text(" **Hello DeAr,** I am Text Downloader Bot.\nI can download videos from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow Send Your **TXT File:-**\n")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
@@ -116,7 +116,7 @@ async def account_login(bot: Client, m: Message):
         os.remove(x)
         # print(len(links))
     except:
-        await m.reply_text("Invalid file input.ðŸ¥²")
+        await m.reply_text("Invalid file input.🥲")
         os.remove(x)
         return
 
@@ -736,7 +736,7 @@ async def account_login(bot: Client, m: Message):
                 await reply.delete(True)
                 time.sleep(1)
             except Exception as e:
-                await m.reply_text(f"**downloading failed âŒ**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}` & `{url1}`")
+                await m.reply_text(f"**downloading failed **\n{str(e)}\n**Name** - {name}\n**Link** - `{url}` & `{url1}`")
                 continue
     except Exception as e:
         await m.reply_text(e)
@@ -786,9 +786,9 @@ async def account_login(bot: Client, m: Message):
 
 
 
-@bot.on_message(filters.command('vision'))
+@bot.on_message(filters.command('pdf'))
 async def vision_pdf(bot: Client, m: Message):
-    editable = await m.reply_text("Send txt file")
+    editable = await m.reply_text("**Hello DeAr,** I am Text File Downloader Bot.\nI can download **PDFs of vision** from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow Send Your **TXT File:-**\n")
     input: Message = await bot.listen(editable.chat.id)
     if 2 + 2 == 4: #hehe
         x = await input.download()
@@ -806,20 +806,20 @@ async def vision_pdf(bot: Client, m: Message):
                 links.append(i.split(":", 1))
             os.remove(x)
         except:
-            await m.reply_text("Invalid file input.")
+            await m.reply_text("Invalid file input.☹️")
             os.remove(x)
             return
             
-    editable = await m.reply_text(f"Total links found are {len(links)}\n\nSend From where you want to download, Initial is 0")
+    editable = await m.reply_text(f"Total links found are {len(links)}\n\nSend From where you want to download,\n\nInitial is 0")
     input1: Message = await bot.listen(editable.chat.id)
     count = input1.text
     count = int(count)      	
     	            
-    await m.reply_text("Batch name")
+    await m.reply_text("**Enter Batch Name**")
     inputy: Message = await bot.listen(editable.chat.id)
     raw_texty = inputy.text
 
-    await m.reply_text("Cookie")
+    await m.reply_text("**Enter Cookie**")
     input2: Message = await bot.listen(editable.chat.id)
     cookie = input2.text
     cookies = cookies = {'PHPSESSID': f'{cookie}'}
@@ -830,7 +830,7 @@ async def vision_pdf(bot: Client, m: Message):
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()[:57]
             name = f'{str(count).zfill(3)}) {name1}'
-            cc = f'vision pdf'
+            cc = f'{str(count).zfill(3)}. {name1} {res}.pdf\n\n**Batch:-** {raw_text0}\n\n'
             ka = await helper.vision(url, name, cookies)
             await m.reply_document(ka, caption=cc)
             count += 1
