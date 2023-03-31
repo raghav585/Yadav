@@ -830,7 +830,7 @@ async def vision_pdf(bot: Client, m: Message):
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()[:57]
             name = f'{str(count).zfill(3)}) {name1}'
-            cc = f'{str(count).zfill(3)}. {name1}.pdf\n\n**Batch:-** {raw_text0}\n\n'
+            cc = f'{str(count).zfill(3)}. {name1}.pdf\n\n**Batch:-** {raw_texty}\n\n'
             ka = await helper.vision(url, name, cookies)
             await m.reply_document(ka, caption=cc)
             count += 1
@@ -838,7 +838,7 @@ async def vision_pdf(bot: Client, m: Message):
             time.sleep(3)
     except Exception as e:
         await m.reply_text(e)
-
+        await m.reply_text("Done.")
 
 
 
