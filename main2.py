@@ -855,7 +855,7 @@ async def vision_pdf(bot: Client, m: Message):
 
 
 
-@bot.on_message(filters.command(["pw"]) & (filters.chat(auth_groups)))
+@bot.on_message(filters.command(["pw"]) & (filters.chat(sudo_groups)))
 async def txt_handler(bot: Client, m: Message):
     editable  = await m.reply_text("**Hello DeAr,** I am Text File Downloader Bot.\nI can download **Videos of Physics wallah** from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow Send Your **TXT File:-**\n")
     
@@ -978,8 +978,14 @@ async def txt_handler(bot: Client, m: Message):
         logging.error(e)
         await m.reply_text(e)
     await m.reply_text("Done.")    
+
+
+
+
+
+
     
-@bot.on_message(filters.command(["link"])& (filters.chat(auth_users)))
+@bot.on_message(filters.command(["link"]) & (filters.chat(sudo_groups)))
 async def link_handler(bot: Client, m: Message):
     editable = await m.reply_text('Send link in **Name&link** format to download')
     input9: Message = await bot.listen(editable.chat.id)
@@ -1101,8 +1107,13 @@ async def link_handler(bot: Client, m: Message):
         os.remove(f"{filename}.jpg")
     except Exception as e:
         await m.reply_text(e)
+
+
+
+
+
         
-@bot.on_message(filters.command(["url"])& (filters.chat(auth_users)))
+@bot.on_message(filters.command(["url"]) & (filters.chat(sudo_groups)))
 async def ytdlp_handler(bot: Client, m: Message):
     editable = await m.reply_text('Send link in **Name&link** format to get its info')
     input: Message = await bot.listen(editable.chat.id)
