@@ -855,7 +855,7 @@ async def vision_pdf(bot: Client, m: Message):
 
 
 
-@bot.on_message(filters.command(["pw"])&(filters.chat(auth_users)))
+@bot.on_message(filters.command(["pw"]) & (filters.chat(auth_groups)))
 async def txt_handler(bot: Client, m: Message):
     editable  = await m.reply_text("**Hello DeAr,** I am Text File Downloader Bot.\nI can download **Videos of Physics wallah** from text file one by one.\n\n**Developer: Smile Bhai** \n**Language:** Python\n**Framework:** 🔥Pyrogram\n\nNow Send Your **TXT File:-**\n")
     
