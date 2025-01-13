@@ -285,8 +285,8 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:  
-                cc = f'** {str(count).zfill(3)}.** {name1} {res}.mkv\n**Batch:-** {b_name}\n\n{creditx}'
-                cc1 = f'** {str(count).zfill(3)}.** {name1}.pdf \n**Batch:-** {b_name}\n\n{creditx}'
+                cc = f'** {str(count).zfill(3)}.** {name1} {res}.mkv\n\n**Batch:-** {b_name}\n\n{creditx}'
+                cc1 = f'** {str(count).zfill(3)}.** {name1}.pdf \n\n**Batch:-** {b_name}\n\n{creditx}'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -312,7 +312,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**⥥ Downloading »**\n\n**Name:-** `{name}\nQuality:- {raw_text2}`\n\n"
+                    Show = f"**⥥ Downloading »**\n\n**Name:-** `{name}\n\nQuality:- {raw_text2}`\n\n"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
