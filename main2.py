@@ -47,10 +47,10 @@ bot = Client(
 @bot.on_message(filters.command(["start"]) & filters.chat(sudo_groups))
 async def start_handler(bot: Client, m: Message):
     menu_text = (
-        "Welcome to XENOMORPH Downloader Bot! \n\n"
+        "Welcome to **TXT** Downloader Bot! \n\n"
         "[Generic Services]\n"
         "1. For All PDF /pdf\n"
-        "2. For TXT /tor\n"
+        "2. For TXT /txt \n"
     )
     
     await m.reply_text(menu_text)
@@ -179,7 +179,7 @@ async def stats(_,event: Message):
     await event.reply_text(f"{stats}")    
 
 
-@bot.on_message(filters.command(["tor"]) & filters.chat(sudo_groups))
+@bot.on_message(filters.command(["txt"]) & filters.chat(sudo_groups))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text("Send links listed in a txt file in format **Name:link**") 
     input_msg = await bot.listen(editable.chat.id)
@@ -285,8 +285,8 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:  
-                cc = f'** {str(count).zfill(3)}.** {name1} {res}.mkv\n**Batch »** {b_name}\n\n{creditx}'
-                cc1 = f'** {str(count).zfill(3)}.** {name1}.pdf \n**Batch »** {b_name}\n\n{creditx}'
+                cc = f'** {str(count).zfill(3)}.** {name1} {res}.mkv\n**Batch:-** {b_name}\n\n{creditx}'
+                cc1 = f'** {str(count).zfill(3)}.** {name1}.pdf \n**Batch:-** {b_name}\n\n{creditx}'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -312,7 +312,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**⥥ Downloading »**\n\n**Name »** `{name}\nQuality » {raw_text2}`\n\n**Url »** `{url}`"
+                    Show = f"**⥥ Downloading »**\n\n**Name:-** `{name}\nQuality:- {raw_text2}`\n\n"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
