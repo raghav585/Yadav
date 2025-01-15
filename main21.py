@@ -1149,8 +1149,8 @@ async def ytdlp_handler(bot: Client, m: Message):
 
 
 
-import pyrogram
-@bot.on_message(filters.command(["bot"]))
+#import pyrogram
+@bot.on_message(filters.command(["cw"]))
 async def start(bot, update):
       await update.reply_text("Hi i am **Careerwill Downloader**.\n\n"
                                "**NOW:-** "
@@ -1175,7 +1175,7 @@ info= {
     "email":"",
 }
 
-@bot.on_message(filters.command(["bot"])& ~filters.edited)
+@bot.on_message(filters.command(["cw"])& ~filters.edited)
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
         "Send **ID & Password** in this manner otherwise bot will not respond.\n\nSend like this:-  **ID*Password**"
@@ -1455,13 +1455,13 @@ async def account_login(bot: Client, m: Message):
     await m.reply_text("Done")
 
 
-import os
-import tempfile
-from pyrogram import Client, filters
-from pyrogram.types import InputMediaDocument
-from dotenv import load_dotenv
+#import os
+#import tempfile
+#from pyrogram import Client, filters
+#from pyrogram.types import InputMediaDocument
+#from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env
+#load_dotenv()  # Load environment variables from .env
 
 # API information (get from https://my.telegram.org/)
 #API_ID = int(os.getenv("API_ID"))
