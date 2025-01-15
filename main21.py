@@ -1149,7 +1149,7 @@ async def ytdlp_handler(bot: Client, m: Message):
 
 
 
-
+import pyrogram
 @bot.on_message(filters.command(["bot"]))
 async def start(bot, update):
       await update.reply_text("Hi i am **Careerwill Downloader**.\n\n"
