@@ -1455,6 +1455,69 @@ async def account_login(bot: Client, m: Message):
     await m.reply_text("Done")
 
 
+import os
+import tempfile
+from pyrogram import Client, filters
+from pyrogram.types import InputMediaDocument
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env
+
+# API information (get from https://my.telegram.org/)
+#API_ID = int(os.getenv("API_ID"))
+#API_HASH = os.getenv("API_HASH")
+#BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+#bot = Client("txt_to_html_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+
+
+def format_text_to_html(file_path):
+    html_content = "<html><head><title>Links</title></head><body><ul>"
+    try:
+        with open(file_path, "r") as file:
+            for line in file:
+                line = line.strip()  # Remove leading/trailing whitespace
+                if ":" not in line:
+                   continue
+                name, link = line.split(":", 1)  # Split on first colon only
+                name = name.strip()
+                link = link.strip()
+                html_content += f'<li><a href="{link}">{name}</a></li>'
+        html_content += "</ul></body></html>"
+    except Exception as e:
+       return None, f"Error reading file or processing the file {e}"
+    return html_content, None
+
+@bot.on_message(filters.command("html"))
+async def start_command(client, message):
+    await message.reply_text("Send me a .txt file with 'formal name:link' entries.")
+
+
+@bot.on_message(filters.document & filters.text)
+async def convert_text_file(client, message):
+   try:
+        file_path = await client.download_media(message.document)
+        if not file_path.endswith(".txt"):
+           await message.reply_text("Only .txt files are accepted")
+           os.remove(file_path) #Delete the downloaded file.
+           return
+        html_content, error = format_text_to_html(file_path)
+        if error:
+           await message.reply_text(error)
+           os.remove(file_path) #Delete the downloaded file.
+           return
+        # Create temporary file
+        with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp_file:
+            tmp_file.write(html_content.encode("utf-8"))
+            temp_file_path = tmp_file.name
+
+        #Send HTML file to the user
+        await client.send_document(chat_id=message.chat.id, document=temp_file_path, file_name="links.html")
+        os.remove(file_path) #Delete the downloaded txt file.
+        os.remove(temp_file_path) #Delete the downloaded html file.
+   except Exception as e:
+        await message.reply_text(f"An error occurred {e}")
+
 
 
 
