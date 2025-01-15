@@ -404,7 +404,7 @@ async def account_login(bot: Client, m: Message):
                     time.sleep(1)
 
             except Exception as e:
-                await m.reply_text(f"**downloading failed **\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n")
+                await m.reply_text(f"**downloading failed **\n\n{str(e)}\n**Name** - {name}\n")
                 continue
 
     except Exception as e:
