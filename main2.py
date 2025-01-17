@@ -323,7 +323,7 @@ async def account_login(bot: Client, m: Message):
 
             except Exception as e:
                 await m.reply_text(
-                    f"**Downloading Interrupted **\n{str(e)}\n**Name** » {name}\n**Link** » `{url}`"
+                    f"**Downloading Interrupted **\n\n{str(e)}\n**Name:-**  {name}\n\n**Link:-** Null"
                 )
                 continue
 
