@@ -6,7 +6,6 @@ import random
 import time
 import re
 from tabulate import tabulate
-from cfonts import render
 from concurrent.futures import ThreadPoolExecutor
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -110,7 +109,7 @@ def get_class_detail(session, classid):
       print(f"Error fetching class detail for classid={classid}: {str(e)}")
       return None
 
-@bot.on_message(filters.command("start"))
+@bot.on_message(filters.command("cw"))
 async def start_command(client, message):
     await message.reply_text(
         "Hello! I am the careerwill bot. Please provide login credentials"
