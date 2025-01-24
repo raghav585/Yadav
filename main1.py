@@ -336,48 +336,64 @@ async def account_login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["ziptxt"]) & filters.chat(sudo_groups))
 async def ziptxt_handler(bot: Client, m: Message):
-    editable = await m.reply_text("Send the TXT file containing .zip URLs in the format *Name:zip_url*")
+    editable = await m.reply_text("Send links listed in a txt file in format **Name:zip_url**")
     input_msg = await bot.listen(editable.chat.id)
     x = await input_msg.download()
+    
     await input_msg.delete(True)
 
+    path = f"./downloads/{m.chat.id}"
+    file_name, ext = os.path.splitext(os.path.basename(x))
+    credit = f"Downloaded by [{m.from_user.first_name}](tg://user?id={m.from_user.id})" if m.from_user else "Downloaded anonymously"
+    
     try:
-        with open(x, "r", encoding="utf-8") as f:
-            content = f.read().splitlines()
-        links = [line.split(":", 1) for line in content if line]
+        with open(x, "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        links = [i.split(":", 1) for i in content]
         os.remove(x)
-    except Exception as e:
-        logging.error(e)
-        await m.reply_text("Invalid file input ❌.")
+    except:
+        await m.reply_text("Invalid file input.")
         os.remove(x)
         return
-
-    editable = await m.reply_text(f"Total .zip links found: {len(links)}\n\nSend the starting range for downloads (initial is × 1 ×)")
-    input0: Message = await bot.listen(editable.chat.id)
-    start_range = int(input0.text)
+    
+    await editable.edit(f"Total links found are **{len(links)}**\n\nSend from where you want to download (initial is **1**)")
+    input0 = await bot.listen(editable.chat.id)
+    raw_text = input0.text
     await input0.delete(True)
 
-    await editable.edit("*Enter Batch Name*")
-    input_batch: Message = await bot.listen(editable.chat.id)
-    batch_name = input_batch.text
-    await input_batch.delete(True)
-
+    await editable.edit("**Enter Batch Name or send `df` for grabbing it from txt.**")
+    input1 = await bot.listen(editable.chat.id)
+    raw_text0 = input1.text
+    await input1.delete(True)
+    b_name = file_name if raw_text0 == 'df' else raw_text0
+    
+    await editable.delete()
+    
+    count = int(raw_text) if len(links) > 1 else 1
+    
     try:
-        count = start_range
-        for i in range(start_range - 1, len(links)):
-            name = links[i][0].strip()
-            zip_url = links[i][1].strip()
-            
+        message = await bot.send_message(sudo_groups, f"❇️ {b_name}")
+        await message.pin()
+        
+        for i in range(count - 1, len(links)):
+            name = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
+            zip_url = "https://" + links[i][1].strip()
             zip_file_path = f"{name}.zip"
+            
             try:
+                Show = f"**⥥ Downloading »**\n\n**Name »** `{name}`\n\n**Url »** `{zip_url}`"
+                prog = await m.reply_text(Show)
+                
                 response = requests.get(zip_url, stream=True)
                 response.raise_for_status()
                 with open(zip_file_path, "wb") as zip_file:
                     for chunk in response.iter_content(chunk_size=8192):
                         zip_file.write(chunk)
                 
-                cc = f'{str(count).zfill(3)}. {name}.zip\n\nBatch: {batch_name}\n\n'
-                await m.reply_document(zip_file_path, caption=cc)
+                cc = f'** {str(count).zfill(3)}.** {name}.zip\n\n**Batch »** {b_name}\n\n{credit}'
+                await prog.delete(True)
+                await bot.send_document(chat_id=m.chat.id, document=zip_file_path, caption=cc)
                 os.remove(zip_file_path)
             except requests.exceptions.RequestException as e:
                 await m.reply_text(f"Failed to download {name}.zip: {str(e)}")
@@ -390,5 +406,3 @@ async def ziptxt_handler(bot: Client, m: Message):
         await m.reply_text(f"An unexpected error occurred: {str(e)}")
     await m.reply_text("Completed downloading zip files ✅")
 
-
-bot.run()
