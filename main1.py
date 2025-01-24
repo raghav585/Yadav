@@ -48,7 +48,7 @@ bot = Client(
 @bot.on_message(filters.command(["start"]) & filters.chat(sudo_groups))
 async def start_handler(bot: Client, m: Message):
     menu_text = (
-        "Welcome to XENOMORPH Downloader Bot! \n\n"
+        "Welcome to **TXT** Downloader Bot! \n\n"
         "[Generic Services]\n"
         "1. For All PDF /pdf\n"
         "2. For TXT /tor\n"
