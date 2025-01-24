@@ -35,6 +35,7 @@ import os
 import yt_dlp
 from bs4 import BeautifulSoup
 from pyrogram.types import InputMediaDocument
+import zipfile
 
 botStartTime = time.time()
 batch = []
@@ -330,4 +331,64 @@ async def account_login(bot: Client, m: Message):
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done ✅")
+
+
+
+@bot.on_message(filters.command(["ziptxt"]) & filters.chat(sudo_groups))
+async def ziptxt_handler(bot: Client, m: Message):
+    editable = await m.reply_text("Send the TXT file containing .zip URLs in the format *Name:zip_url*")
+    input_msg = await bot.listen(editable.chat.id)
+    x = await input_msg.download()
+    await input_msg.delete(True)
+
+    try:
+        with open(x, "r", encoding="utf-8") as f:
+            content = f.read().splitlines()
+        links = [line.split(":", 1) for line in content if line]
+        os.remove(x)
+    except Exception as e:
+        logging.error(e)
+        await m.reply_text("Invalid file input ❌.")
+        os.remove(x)
+        return
+
+    editable = await m.reply_text(f"Total .zip links found: {len(links)}\n\nSend the starting range for downloads (initial is × 1 ×)")
+    input0: Message = await bot.listen(editable.chat.id)
+    start_range = int(input0.text)
+    await input0.delete(True)
+
+    await editable.edit("*Enter Batch Name*")
+    input_batch: Message = await bot.listen(editable.chat.id)
+    batch_name = input_batch.text
+    await input_batch.delete(True)
+
+    try:
+        count = start_range
+        for i in range(start_range - 1, len(links)):
+            name = links[i][0].strip()
+            zip_url = links[i][1].strip()
+            
+            zip_file_path = f"{name}.zip"
+            try:
+                response = requests.get(zip_url, stream=True)
+                response.raise_for_status()
+                with open(zip_file_path, "wb") as zip_file:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        zip_file.write(chunk)
+                
+                cc = f'{str(count).zfill(3)}. {name}.zip\n\nBatch: {batch_name}\n\n'
+                await m.reply_document(zip_file_path, caption=cc)
+                os.remove(zip_file_path)
+            except requests.exceptions.RequestException as e:
+                await m.reply_text(f"Failed to download {name}.zip: {str(e)}")
+            except Exception as e:
+                await m.reply_text(f"Error processing {name}.zip: {str(e)}")
+
+            count += 1
+            time.sleep(2)
+    except Exception as e:
+        await m.reply_text(f"An unexpected error occurred: {str(e)}")
+    await m.reply_text("Completed downloading zip files ✅")
+
+
 bot.run()
